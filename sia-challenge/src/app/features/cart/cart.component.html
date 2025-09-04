@@ -1,0 +1,36 @@
+<div class="cart-container">
+  <h2> Carrito de Compras</h2>
+
+  <div *ngIf="items().length === 0" class="empty-cart">
+    <p>Tu carrito está vacío</p>
+  </div>
+
+  <div *ngIf="items().length > 0" class="cart-items">
+    <div class="cart-item" *ngFor="let item of items()">
+      <div class="cart-info">
+        <h4>{{ item.product.name }}</h4>
+        <p class="price">{{ item.product.price | currency:'USD' }}</p>
+      </div>
+
+      <div class="cart-quantity">
+        <button class="btn-small" (click)="decrement(item.product.id)">-</button>
+        <span>{{ item.quantity }}</span>
+        <button class="btn-small" (click)="increment(item.product.id)">+</button>
+      </div>
+
+      <div class="cart-subtotal">
+        {{ item.product.price * item.quantity | currency:'USD' }}
+      </div>
+
+      <button class="btn-remove" (click)="remove(item.product.id)">X</button>
+    </div>
+  </div>
+
+  <div *ngIf="items().length > 0" class="cart-total">
+    <h3>Total: {{ total() | currency:'USD' }}</h3>
+    <div class="cart-actions">
+      <button class="btn-clear" (click)="clear()"> Vaciar carrito</button>
+      <button class="btn-confirm" (click)="confirmPurchase()"> Confirmar Compra</button>
+    </div>
+  </div>
+</div>

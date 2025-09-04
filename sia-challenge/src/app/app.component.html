@@ -1,0 +1,7 @@
+<nav class="navbar">
+  <a routerLink="/">Productos</a>
+  <a [routerLink]="['/cart']">Carrito ({{ cart.items().length }})</a>
+</nav>
+<main>
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,11 @@
+<div *ngIf="product()as p;  else notFound">
+    <h2>{{ p.name }}</h2>
+    <p>Categoría: {{ p.category }}</p>
+    <p>Precio: ${{ p.price }}</p>
+    <button (click)="addToCart(p)">Agregar al carrito</button>
+    <a routerLink="/">Volver</a>
+  </div>
+  <ng-template #notFound>
+    <p>Producto no encontrado.</p>
+    <a [routerLink]="['/products']">Volver</a>
+  </ng-template>

@@ -1,0 +1,26 @@
+<h2>Productos</h2>
+
+<!-- Filtros -->
+<div class="filters">
+    <input type="text" placeholder="Buscar por nombre" [(ngModel)]="searchTerm">
+
+    <select [(ngModel)]="selectedCategory">
+        <option value="">Todas</option>
+        <ng-container *ngFor="let c of categories()">
+            <option [value]="c">{{ c }}</option>
+        </ng-container>
+    </select>
+
+    <input type="number" placeholder="Precio máximo" [(ngModel)]="maxPrice">
+</div>
+
+<div class="product-list">
+    <!-- Lista de productos -->
+    @for (p of filteredProducts(); track p.id)
+    {
+        <app-product-card
+        [product]="p"
+        (add)="addToCart($event)">
+      </app-product-card>
+    }
+</div>

@@ -1,0 +1,40 @@
+<div class="order-summary">
+    <h2>Resumen del Pedido</h2>
+  
+    <div *ngIf="items().length === 0">
+      <p>No hay productos en el carrito.</p>
+    </div>
+  
+    <table *ngIf="items().length > 0">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of items()">
+          <td>{{ item.product.name }}</td>
+          <td>{{ item.quantity }}</td>
+          <td>{{ item.product.price | currency:'USD' }}</td>
+          <td>{{ item.product.price * item.quantity | currency:'USD' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="items().length > 0" class="order-total">
+      <p><strong>Total: {{ total() | currency:'USD' }}</strong></p>
+      <button (click)="confirmOrder()" [disabled]="loading()">
+        {{ loading() ? 'Enviando...' : 'Confirmar pedido' }}
+      </button>
+    </div>
+  
+    <div *ngIf="successMessage()" class="success">
+      {{ successMessage() }}
+    </div>
+    <div *ngIf="errorMessage()" class="error">
+      {{ errorMessage() }}
+    </div>
+  </div>
